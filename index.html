@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="assets/css/modbootstrapstyle.css"> -->
+    <!-- moved modbootstrap link to bottom of body -->
+
+    <title>All Aboard!</title>
+</head>
+
+<body class="d-flex flex-column h-90">
+    <main role="main" class="flex-shrink-0 mainfont my-4 mt-0" id="maincontainerindexpage">
+        <!-- ==+===============  Main Container - Begin page content ===============+== -->
+        <div class="mt-5 container row mx-auto" id="mainRowcontent">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 text-danger">
+
+
+                <!-- MAIN DISPLAY -->
+
+                <!-- Jumbotron - Train Tracker -->
+                <div class="jumbotron" style="background-color: rgb(54, 94, 128); color: white">
+                    <h1 class="text-center">All Aboard - Train Times</h1>
+                    <h3 class="text-center">Transit Timetable</h3>
+                </div>
+
+                <!-- Display - Firebase Saved - Current trains Card -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4 transparent-card">
+                            <div class="card-header">Current trains</div>
+                            <div class="card-body">
+                                <table class="table table-sm table-hover" id='train-table'>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Train Name</th>
+                                            <th scope="col">Destination</th>
+                                            <th scope="col">Frequency (min)</th>
+                                            <th scope="col">Next Arrival</th>
+                                            <th scope="col">Minutes Away</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add train Card -->
+                <!-- Entry Form -(Train Name, Destination, First Train Time HH:mm, Frequency) -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-4 transparent-card">
+                            <div class="card-header">Add Train</div>
+                            <div class="card-body">
+                                <!-- Card Entry Form -->
+                                <form>
+                                    <div class="form-group">
+                                        <label for="train-name-input">Train Name</label>
+                                        <input class="form-control" id="train-name-input" placeholder="" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="destination-input">destination</label>
+                                        <input class="form-control" id="destination-input" placeholder="" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="start-input">First Train Time (HH:mm - military time -  00:00 - 24:00)</label>
+                                        <input class="form-control" id="start-input" placeholder="23:05" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rate-input">Frequency (min)</label>
+                                        <input class="form-control" id="rate-input" placeholder="65" type="text">
+                                    </div>
+                                    <button class="btn btn-primary float-right" id="add-train-btn">Submit</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <!-- <h1>Ouch! You've clicked me    <span id="click-value"></span>  times!  </h1>
+                <button id="click-button">Click Me!!!!</button> -->
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </main>
+
+
+
+    <!-- STICKY FOOTER BOOTSTRAP -->
+    <footer class="footer mt-auto py-1 bg-dark">
+        <div class="container">
+            <span class="text-muted"><a class="mainfont notextdecoration text-muted"
+                    href="mailto:thomas.white.ucf@gmail.com">Thomas.white.ucf@gmail.com</a></span>
+        </div>
+    </footer>
+
+
+    <!-- ==+=============================================================================================+== -->
+    <!-- ==+=============================================================================================+== -->
+    <!-- ~ ~ _  Bootsrap Javascript  _ ~ ~ -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- ==+========jQuery============+== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- ==+======Firebase============+== -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+    <!-- Specific Firebase products we want -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+    <!-- Moment.js Reference -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script> -->
+    <!-- other moment reference -->
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+    <!-- ==+===========================+== -->
+    <!-- ==+===========================+== -->
+    
+    <!-- APP LOGIC -->
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <link rel="stylesheet" href="assets/css/modbootstrapstyle.css">
+    <!-- ==+===========================+== -->
+    <!-- ==+===========================+== -->
+
+
+</body>
+
+</html>
