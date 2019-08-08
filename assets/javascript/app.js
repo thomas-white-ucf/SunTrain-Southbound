@@ -53,15 +53,15 @@ $("#add-train-btn").on("click", function (event) {
     // Uploads train data to the database
     dataRef.ref().push(newTrain);
 
-    // Logs everything to console
-    console.log("======== CLICKED #add-train-btn ===============")
-    console.log("Entered Train Name and info = " + newTrain.name, newTrain.destination, newTrain.start, newTrain.rate);
-
     // Clears all of the text-boxes
     $("#train-name-input").val("");
     $("#destination-input").val("");
     $("#start-input").val("");
     $("#rate-input").val("");
+
+    // Logs everything to console
+    console.log("======== CLICKED #add-train-btn ===============")
+    console.log("Entered Train Name and info = " + newTrain.name, newTrain.destination, newTrain.start, newTrain.rate);
 });
 
 // ==+====  ON CHILD ADDED
@@ -74,7 +74,7 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     var trainStart = childSnapshot.val().start;
     var trainRate = childSnapshot.val().rate;
 
-    // ========================== TIME FUNCTION ======================================
+    // ======================= TIME FUNCTION ================================
     // Console.Log everything that's coming out of snapshot
     console.log("TIME===dataRef====on( CHILD_ADDED START==== TIME FUNCTIONS")
     console.log("trainName & info == " + trainName)
@@ -87,11 +87,10 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     // Get the diffArrivalTrainTime - this is difference in time from NOW to the first train
     var trainStartPretty = moment.unix(trainStart).format("HH:mm");
     var diffArrivalTrainTime = Math.abs(moment().diff(moment(trainStartPretty, "HH:mm"), "minutes"));
-    
+
     console.log("trainStartPretty = " + trainStartPretty + "HH:mm");
     console.log("diffArrivalTrainTime = " + diffArrivalTrainTime + " minutes");
 
-    
     // train rate in differnet format could help
     // Calculate the total time until next train
     var remainder = (diffArrivalTrainTime % 60);
@@ -138,5 +137,7 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     console.log("Errors handled: " + errorObject.code);
 });
 
+// END
+// ==+=======================================================+==
 
 

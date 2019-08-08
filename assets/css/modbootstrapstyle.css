@@ -11,8 +11,14 @@
 }  */
 
 body {
-    background-image: url(../images/map2.png);
+    background-image: url(../images/maps.jpg);
     background-size: cover;
+}
+
+.jumbotron{
+    background-color: rgba(54, 93, 128, 0.536); 
+    color: white;
+    text: 10%;
 }
 
 .transparent-card {
